@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
-from user.models import User, Company, Address
+from user.models import User, Company, Address, Geo
 
 class CompanySerializer(ModelSerializer):
     class Meta:
@@ -11,15 +11,21 @@ class CompanyNameSerializer(ModelSerializer):
         model = Company
         fields = ["name"]
 
+class GeoSeriilizer(ModelSerializer):
+    class Meta:
+        model = Geo
+        fields = ["lat", "lng"]
+
 class AddressSerializer(ModelSerializer):
+    geo = GeoSeriilizer()
     class Meta:
         model = Address
-        fields = ["street", "suite", "city", "zipcode"]
+        fields = ["street", "suite", "city", "zipcode", "geo"]
 
 
 class UserSerializer(ModelSerializer):
-    company = PrimaryKeyRelatedField(queryset=Company.objects.all())
-    address = PrimaryKeyRelatedField(queryset=Address.objects.all())
+    company = CompanyNameSerializer()
+    address = AddressSerializer()
     class Meta:
         model = User
         fields = ["id", "name", "username", "email","address", "phone", "website", "company"]
@@ -31,3 +37,5 @@ class UserReadSerializer(ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "name", "username", "email","address", "phone", "website", "company"]
+
+        

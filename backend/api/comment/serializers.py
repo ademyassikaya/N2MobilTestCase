@@ -5,4 +5,8 @@ class CommentSerializer(ModelSerializer):
     class Meta:
         model = Comment
         # TODO: post -> postId olmali
-        fields = ["post", "name", "body"]
+        fields = ["post_id","post","id", "name", "body"]
+        extra_kwargs = {
+            "post_id": {"read_only": True},
+            "post": {"write_only": True},
+        }

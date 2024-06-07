@@ -4,4 +4,8 @@ from todo.models import Todo
 class TodoSerializer(ModelSerializer):
     class Meta:
         model = Todo
-        fields = ["user", "id", "title", "completed"]
+        fields = ["user_id","user", "id", "title", "completed"]
+        extra_kwargs = {
+            "user_id": {"read_only": True},
+            "user": {"write_only": True},
+        }

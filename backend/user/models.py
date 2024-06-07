@@ -6,11 +6,18 @@ class Company(models.Model):
     def __str__(self) -> str:
         return self.name
 
+class Geo(models.Model):
+    lat = models.CharField(max_length=100)
+    lng = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.lat}, {self.lng}"
 class Address(models.Model):
     street = models.CharField(max_length=100)
     suite = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     zipcode = models.CharField(max_length=100)
+    geo = models.ForeignKey(Geo, on_delete=models.CASCADE, default=None)
     
     def __str__(self):
         return f"{self.street}, {self.suite}, {self.city}, {self.zipcode}"

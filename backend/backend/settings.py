@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'rest_framework',
+    'corsheaders',
+    "drf_spectacular",
 ] + APPS
 
 MIDDLEWARE = [
@@ -58,7 +60,10 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'djangorestframework_camel_case.middleware.CamelCaseMiddleWare',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True   
 
 ROOT_URLCONF = "backend.urls"
 
@@ -133,6 +138,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+MEDIA_ROOT = BASE_DIR / "photos"
+MEDIA_URL = "/images/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -152,4 +160,5 @@ REST_FRAMEWORK = {
         'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
