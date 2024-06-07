@@ -29,7 +29,7 @@ const getTodos = () => {
   ApiService.get("/api/todos")
     .then((response) => {
       todos.value = response.data.filter(
-        (todo) => todo.user === userStore.userDetails.userId
+        (todo) => todo.userId === userStore.userDetails.userId
       );
     })
     .catch((error) => {

@@ -44,7 +44,7 @@ const postModel = () => {
   ApiService.get("/api/comments/")
     .then((response) => {
       comments.value = response.data.filter(
-        (comment) => comment.post === props.postId
+        (comment) => comment.postId === props.postId
       );
       isModalOpen.value = true;
     })

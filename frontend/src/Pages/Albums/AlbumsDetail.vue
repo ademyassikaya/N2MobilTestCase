@@ -11,7 +11,7 @@
       </div>
     </div>
     <div v-else>
-      <p>No photos found for this album</p>
+      <p class="ml-12">No photos found for this album</p>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
       ApiService.get("/api/photos/")
         .then((response) => {
           albumPhotos.value = response.data.filter(
-            (albumPhotos) => albumPhotos.album == albumId
+            (albumPhotos) => albumPhotos.albumId == albumId
           );
         })
         .catch((error) => {

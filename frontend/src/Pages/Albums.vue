@@ -14,7 +14,10 @@
       >
         <div class="mb-3 grid grid-cols-2 gap-0 mt-4">
           <img
-            v-for="(photo, photoIndex) in albumPhotos[album.id]?.slice(0, 4)"
+            v-for="(photo, photoIndex) in albumPhotos[album.albumId]?.slice(
+              0,
+              4
+            )"
             :src="photo?.thumbnailUrl"
             :key="photo.id"
             class="w-full h-24 object-cover aspect-w-1 aspect-h-1"
@@ -49,7 +52,7 @@ export default {
       ApiService.get("/api/albums/")
         .then((response) => {
           albums.value = response.data.filter(
-            (album) => album.user === userStore.userDetails.userId
+            (album) => album.userId == userStore.userDetails.userId
           );
           chunkedAlbums.value = chunkArray(albums.value, 3);
         })
