@@ -15,7 +15,7 @@
             {
               titleType: 'Location',
               titleIcon: '/location-icon.svg',
-              address: user.address.city + '/' + user.address.street,
+              address: user.address.street + '/' + user.address.city,
             },
             {
               titleType: 'Company',
